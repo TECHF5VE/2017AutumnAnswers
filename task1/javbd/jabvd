@@ -1,0 +1,9 @@
+编号：15
+
+  a.与Git同类型的工具有？
+   商用版本：CVS、SVN、VSS、ClearCase
+   免费版本：Bitkeeper、Mercarial、Bazaar
+  b.Git分了哪几个区?
+   工作区间、缓存区、本地仓库、远程仓库
+  c.GitHub的logo是什么动物？
+   吉祥物章鱼猫
