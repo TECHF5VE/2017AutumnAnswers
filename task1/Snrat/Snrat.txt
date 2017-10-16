@@ -1,9 +1,8 @@
-#ID:26
-#By Freetion
-Qa. 与 Git 同类型的工具有？
-Aa. CVS,SVN
-Qb. Git 分了哪几个区？
-Ab. 工作区、缓存区、仓库区
-Qc. GitHub 的 Logo 是什么动物？
-Ac. 章鱼喵
-#End
+## ID:26
+1. Q. > * 与Git 同类型的工具有？ *
+   A. CVS,SVN
+2. Q. > * Git 分了哪几个区？ *
+   A. 工作区、缓存区、仓库区
+3. Q. > * GitHub 的 Logo 是什么动物？ *
+   A. 章鱼喵
+### End
