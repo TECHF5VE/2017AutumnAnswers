@@ -1,9 +1,0 @@
-ID in TechF5ve: 2
-Q1: 与 Git 同类型的工具有?
-A1: 版本控制工具(Version Control System)有Perforce、Subversion and CVS
-
-Q2: Git 分了哪几个区？
-A2: Working Tree、Staging Area and Git directory
-
-Q3: GitHub 的 Logo 是什么动物？
-A3:  Octocat 章鱼猫
