@@ -3,4 +3,4 @@
 问题2.工作区（working directory）
       暂缓区（stage index）
       历史记录区（history）
-问题三3.八爪猫
+问题三3.章鱼猫
