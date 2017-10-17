@@ -8,7 +8,7 @@ A: 有 GNU Bazaar,BitKeeper,darcs,Fossil,Mercurial,Monotone,Subversion(SVN),Team
 
 ### Q: Git 分了哪几个区？
 
-A: 工作区，暂存区，本地仓库，远程仓库
+A: 工作区，暂存区，本地仓库
 
 ### Q: GitHub 的 Logo 是什么动物？
 
