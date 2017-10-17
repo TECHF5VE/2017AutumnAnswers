@@ -1,9 +1,9 @@
-ID in TechF5ve: 2
-Q1: Óë Git Í¬ÀàĞÍµÄ¹¤¾ßÓĞ?
-A1: °æ±¾¿ØÖÆ¹¤¾ß(Version Control System)ÓĞPerforce¡¢Subversion and CVS
+ï»¿ID in TechF5ve: 2
+Q1: ä¸ Git åŒç±»å‹çš„å·¥å…·æœ‰?
+A1: ç‰ˆæœ¬æ§åˆ¶å·¥å…·(Version Control System)æœ‰Perforceã€Subversion and CVS
 
-Q2: Git ·ÖÁËÄÄ¼¸¸öÇø£¿
-A2: Working Tree¡¢Staging Area and Git directory
+Q2: Git åˆ†äº†å“ªå‡ ä¸ªåŒºï¼Ÿ
+A2: Working Treeã€Staging Area and Git directory
 
-Q3: GitHub µÄ Logo ÊÇÊ²Ã´¶¯Îï£¿
-A3:  Octocat ÕÂÓãÃ¨
+Q3: GitHub çš„ Logo æ˜¯ä»€ä¹ˆåŠ¨ç‰©ï¼Ÿ
+A3:  Octocat ç« é±¼çŒ«
