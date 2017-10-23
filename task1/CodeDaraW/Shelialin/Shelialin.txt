@@ -1,3 +1,4 @@
 a.��Gitͬ���͵Ĺ����У�BitKeeper Mercurial Bazaar  
-b.Git�����ļ����������������ݴ������汾��
-c.GitHub��Logo��ʲô�������������è
+编号11
+a.与Git同类型的工具有？BitKeeper Mercurial Bazaar  
+c.GitHub的Logo是什么动物？吉祥物章鱼猫
