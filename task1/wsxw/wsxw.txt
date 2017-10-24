@@ -1,7 +1,7 @@
-                   ��ţ�15 
-a.��Gitͬ���͵Ĺ����У�      
-   CVS��SVN  
-b.Git �����ļ�������   
-   �������䡢�����������زֿ⡢Զ�ֿ̲�  
-c.GitHub �� Logo ��ʲô��� 
-    ����������è 
+                   编号：15 
+a.与Git同类型的工具有？      
+   CVS、SVN  
+b.Git 分了哪几个区？   
+   工作区间、缓存区、本地仓库、远程仓库  
+c.GitHub 的 Logo 是什么动物？ 
+    吉祥物章鱼猫 
