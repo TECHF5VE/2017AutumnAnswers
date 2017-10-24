@@ -2,9 +2,9 @@
 ## **ID:19**
 ### **Question Answer**
 ***
-1.Source Tree,svn,cvs
+1.svn,cvs
 
-2.working directory
+2.Working directory
  Stage index
  History
 
