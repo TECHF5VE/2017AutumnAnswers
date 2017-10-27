@@ -1,4 +1,0 @@
-# ID:25
-Q1：Mercurial,Bazaar,Darcs
-Q2：工作区，暂存区，版本库
-Q3：章鱼猫
