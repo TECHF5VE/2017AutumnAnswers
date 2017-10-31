@@ -1,16 +1,3 @@
-#include <iostream>
-using namespace std;
-
-//链表节点定义
-struct ListNode
-{
-	int val;
-	ListNode *next;
-	ListNode(int x = 0, ListNode* next = nullptr) :val(x), next(next)
-	{}
-};
-
-//两数相加
 ListNode* addTwoNumbers(ListNode *l1, ListNode *l2)
 {
 	ListNode *result = new ListNode();
@@ -57,51 +44,3 @@ ListNode* addTwoNumbers(ListNode *l1, ListNode *l2)
 
 	return result;
 }
-
-//打印链表
-void showList(ListNode* list)
-{
-	ListNode *p = list->next;
-	while (p != nullptr)
-	{
-		cout << p->val << ' ';
-		p = p->next;
-	}
-}
-
-//用数组初始化链表
-void initList(ListNode * list, int *data, int length)
-{
-	ListNode *p = list;
-	for (int i = 0; i < length; i++)
-	{
-		p->next = new ListNode(data[i]);
-		p = p->next;
-	}
-}
-
-
-template <class T>
-int getArrayLen(T& array)
-{
-	return (sizeof(array) / sizeof(array[0]));
-}
-
-
-int main()
-{
-	ListNode *listA = new ListNode();
-	ListNode *listB = new ListNode();
-	int a[] = { 1, 2, 3, 4 };
-	int b[] = { 5, 6 };
-	initList(listA, a, getArrayLen(a));
-	initList(listB, b, getArrayLen(b));
-
-	ListNode *result = addTwoNumbers(listA, listB);
-	showList(result);
-
-	system("pause");
-	return 0;
-}
-
-
