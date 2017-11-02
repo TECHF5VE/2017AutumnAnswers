@@ -1,0 +1,4 @@
+27
+[+] git same tools: diff CVS SVN BitKeeper
+[+] git designed as: working directory/stage index/history
+[+] github logo is Octocat!
