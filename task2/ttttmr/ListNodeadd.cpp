@@ -1,9 +1,9 @@
 ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
 {
-    ListNode* list=new ListNode(0)
-    ListNode* p1=l1->next,
-              p2=l2->next,
-              p3=list->next;
+    ListNode* list=new ListNode(0);
+    ListNode* p1=l1->next;
+    ListNode* p2=l2->next;
+    ListNode* p3=list->next;
     int num1,num2,//l1和l2的数值
         add=0;//进位标志，初始0
     while(p1!=NULL||p2!=NULL)//均为空时退出
@@ -22,7 +22,7 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
         }
         else num2=0;
 
-        p3->val=new ListNode(num1+num2+add);//相加并赋值
+        p3=new ListNode(num1+num2+add);//相加并赋值
         if(p3->val>=10)//判断是否要进位
         {
             p3->val-=10;
