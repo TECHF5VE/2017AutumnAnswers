@@ -1,0 +1,149 @@
+#include <iostream>
+using namespace std;
+ struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+ };
+ 
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	ListNode *result=NULL;
+	ListNode *l=result;
+
+	int in =0;   
+
+	while (l1 && l2){
+		int val=0;
+		int tempVal= l1->val + l2->val + in;
+		if (tempVal>=10){
+			val=tempVal-10;
+			in=1;
+		} 
+		else{
+			val=tempVal;
+			in=0;
+		}
+
+		ListNode *l3=(ListNode *)malloc(
+			sizeof(ListNode));
+		l3->val=val;
+		l3->next = NULL;
+		if(!l){
+			l=l3;
+			result=l;
+		}else{
+			l->next=l3;
+			l=l->next;
+		}
+
+		l1=l1->next;
+		l2=l2->next;
+	}
+	
+	while(l1){
+		int val=0;
+		int tempVal= l1->val + in;
+		if (tempVal>=10){
+			val=tempVal-10;
+			in=1;
+		} 
+		else{
+			val=tempVal;
+			in=0;
+		}
+
+		ListNode *l3=(ListNode *)malloc(
+			sizeof(ListNode));
+		l3->val=val;
+		l3->next = NULL;
+		if(!l){
+			l=l3;
+		}else{
+			l->next=l3;
+			l=l->next;
+		}
+
+		l1=l1->next;
+		
+	}
+
+
+	while(l2){
+		int val=0;
+		int tempVal= l2->val + in;
+		if (tempVal>=10){
+			val=tempVal-10;
+			in=1;
+		} 
+		else{
+			val=tempVal;
+			in=0;
+		}
+
+		ListNode *l3=(ListNode *)malloc(
+			sizeof(ListNode));
+		l3->val=val;
+		l3->next = NULL;
+		if(!l){
+			l=l3;
+		}else{
+			l->next=l3;
+			l=l->next;
+		}
+		l2=l2->next;
+	}
+
+	
+	if (in)
+	{
+		ListNode *l3=(ListNode *)malloc(
+			sizeof(ListNode));
+		l3->val=in;
+		l3->next = NULL;
+
+		l->next=l3;
+		l=l->next;
+	}
+	return result;
+
+}
+int main()
+{   
+	
+	int a[] = {1,2,3,4};
+	int b[] = {5,6};
+	int i;
+    
+	ListNode *l11=(ListNode *)malloc(sizeof(ListNode));
+	ListNode *l21=(ListNode *)malloc(sizeof(ListNode));
+    ListNode *p1=l11;
+	ListNode *q1=l21;
+	
+	for(i=0;i<sizeof(a)/sizeof(int);i++)
+	{
+		p1->next=new ListNode(a[i]);
+		p1=p1->next;
+		
+	}
+
+
+	
+   
+	for(i=0;i<sizeof(b)/sizeof(int);i++)
+	{
+		q1->next=new ListNode(b[i]);
+		q1=q1->next;
+		
+	}
+	 
+    ListNode *l1=l11->next;
+	ListNode *l2=l21->next;
+	
+	
+	ListNode *l3 = addTwoNumbers(l1, l2);
+	while(l3){
+		cout<<l3->val<<endl;
+		l3=l3->next;
+	}
+	return 0;
+}
