@@ -5,79 +5,88 @@ struct ListNode
 {
 	int val;
 	ListNode *next;
-	ListNode(int x = 0, ListNode* next = nullptr) :val(x), next(next) {}
+	ListNode(int x) : val(x), next(NULL) {};
 };
 
 ListNode *addTwoNumbers(ListNode*l1, ListNode*l2)
 {
+	ListNode* m = l1->next;
+	ListNode* n = l2->next;
 	ListNode*head;
-	ListNode*listC = new ListNode;
+	ListNode*listC = new ListNode(0);
 	head = listC;
 	int t = 0;
-	if (l1 == NULL)
-		return l2;
-	if (l2 == NULL)
-		return l1;
-	while (l1 != NULL&&l2 != NULL)
+	while (m != NULL&&n != NULL)
 	{
-		listC->val = l1->val + l2->val + t;
-		if (listC->val >= 10)
+		head->next = new ListNode(0);
+		head = head->next;
+		head->val = m->val + n->val + t;
+		t = 0;
+		if (head->val >= 10)
 		{
-			listC->val = (listC->val) % 10;
-			t = (listC->val) / 10;
+			t = (head->val) / 10;
+			head->val = (head->val) % 10;
 		}
-		head->next = listC;
-		head = listC;
-		l1 = l1->next;
-		l2 = l2->next;
+		m = m->next;
+		n = n->next;
 	}
-	if (l1 == NULL)
+	if (m == NULL&&n != NULL)
 	{
-		while (l2 != NULL)
-			listC->val = l2->val + t;
-		t = (listC->val) / 10;
-		l2 = l2->next;
+		while (n != NULL)
+		{
+			head->next = new ListNode(0);
+			head = head->next;
+			t = (head->val) / 10;
+			head->val = n->val + t;
+			n = n->next;
+		}
 	}
-	if (l2 == NULL)
+	if (n == NULL&&m != NULL)
 	{
-		while (l1 != NULL)
-			listC->val = l1->val + t;
-		t = (listC->val) / 10;
-		l2 = l2->next;
+		while (m != NULL)
+		{
+			head->next = new ListNode(0);
+			head = head->next;
+			t = (head->val) / 10;
+			head->val = m->val + t;
+			m = m->next;
+		}
 	}
 	if (t == 1)
-		listC->next = new ListNode(1);
-	return listC->next;
+		head->next = new ListNode(1);
+	return listC;
+}
+
+void showlist(ListNode* list)
+{
+	ListNode* g = list->next;
+	while (g != NULL)
+	{
+		cout << g->val << " ";
+		g = g->next;
+	}
 }
 
 int main()
 {
-	ListNode* listA=NULL;
-	ListNode* listB=NULL;
-	int a[] = { 2, 4, 3 };
-	int b[] = { 5, 6, 4 };
+	ListNode* listA = new ListNode(0);
+	ListNode* listB = new ListNode(0);
+	int a[] = { 1,2,3,4 };
+	int b[] = { 5,6 };
 	ListNode* p = listA;
 	ListNode* q = listB;
 	int i;
-	for (i = sizeof(a);i > 0;i--)
+	for (i = 0;i < sizeof(a) / sizeof(int);i++)
 	{
 		p->next = new ListNode(a[i]);
-		p->val = p->next->val;
 		p = p->next;
 	}
-	delete p->next;
-	for (i = sizeof(b);i > 0;i--)
+	for (i = 0;i < sizeof(b) / sizeof(int);i++)
 	{
 		q->next = new ListNode(b[i]);
-		q->val = q->next->val;
 		q = q->next;
 	}
-	delete q->next;
-		ListNode *listC = addTwoNumbers(listA, listB);
-		while (listC != NULL)
-		{
-			cout << listC->val;
-			listC = listC->next;
-		}
+	ListNode *listC = addTwoNumbers(listA, listB);
+	showlist(listC);
 	return 0;
 }
