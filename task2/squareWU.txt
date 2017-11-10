@@ -24,7 +24,7 @@ ListNode *addTwoNumbers(ListNode*l1, ListNode*l2)
 		t = 0;
 		if (head->val >= 10)
 		{
-			t = (head->val) / 10;
+			t = (head->val) / 10;     /*这两步顺序不能调换，否则t总是为0*/
 			head->val = (head->val) % 10;
 		}
 		m = m->next;
@@ -36,8 +36,8 @@ ListNode *addTwoNumbers(ListNode*l1, ListNode*l2)
 		{
 			head->next = new ListNode(0);
 			head = head->next;
-			t = (head->val) / 10;
 			head->val = n->val + t;
+                        t = (head->val) / 10;
 			n = n->next;
 		}
 	}
@@ -47,8 +47,8 @@ ListNode *addTwoNumbers(ListNode*l1, ListNode*l2)
 		{
 			head->next = new ListNode(0);
 			head = head->next;
-			t = (head->val) / 10;
 			head->val = m->val + t;
+			t = (head->val) / 10;
 			m = m->next;
 		}
 	}
@@ -72,7 +72,7 @@ int main()
 	ListNode* listA = new ListNode(0);
 	ListNode* listB = new ListNode(0);
 	int a[] = { 1,2,3,4 };
-	int b[] = { 5,6 };
+	int b[] = { 5,6,8 };
 	ListNode* p = listA;
 	ListNode* q = listB;
 	int i;
