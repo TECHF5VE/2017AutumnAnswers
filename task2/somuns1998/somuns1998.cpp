@@ -25,13 +25,15 @@ ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
 	  }
 	  for(;p->next!=NULL;p=p->next)
 	  {
-		  l->next=new ListNode(p->next->val);
+		  l->next=new ListNode(p->next->val+i);
 		  l=l->next;
+		  i=0;
 	  }
 	  for(;q->next!=NULL;q=q->next)
 	    {
-		  l->next=new ListNode(q->next->val);
+		  l->next=new ListNode(q->next->val+i);
 		  l=l->next;
+		  i=0;
 	  }
 	  return listC;
 }
