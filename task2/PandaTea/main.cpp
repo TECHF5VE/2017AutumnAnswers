@@ -1,49 +1,33 @@
-#include<iostream>
-using namespace std;
-struct ListNode {
-      int val;
-      ListNode *next;
-      ListNode(int x):val(x),next(NULL) {};
-};
- 
-ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-    ListNode*p = l1->next;
-    ListNode*q = l2->next;
-    int jinwei = 0;
-	for(int n = 0;n<3;n++){
-		if(jinwei == 1){cout<<(p->val+q->val)+1;jinwei = 0;}
-		else
-		{
-			if((p->val+q->val)>=10){
-			jinwei = 1;
-			cout<<(p->val+q->val-10);
-		 } else{
-		 cout<<(p->val+q->val);
-	}
-		cout<<" ";
-		
-		p = p->next;
-		q = q->next;
-	}
-}}
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+{
+    ListNode* list=new ListNode(0);
+    ListNode* p1=l1->next;
+    ListNode* p2=l2->next;
+    ListNode* p3=list->next;
+    int num1,num2,add=0;
+    while(p1!=NULL||p2!=NULL)
+    {
+        if(!p1->next)
+        {
+            num1=p1->val;
+            p1=p1->next;
+        }
+        else num1=0;
 
+        if(!p2->next)
+        {
+            num2=p2->val;
+            p2=p2->next;
+        }
+        else num2=0;
 
-int main() {
-	// test codes example
-	ListNode* listA = new ListNode(0);
-	ListNode* listB = new ListNode(0);
-	int a[] = {1, 3, 3};
-	int b[] = {5, 9, 2};
-	ListNode* p = listA; 
-	for(int n = 0;n<3;n++){
-		p->next = new ListNode(a[n]);
-		p = p->next;
-	}
-	ListNode* q = listB; 
-	for(int n = 0;n<3;n++){
-		q->next = new ListNode(b[n]);
-		q = q->next;
-	}
-	
-	addTwoNumbers(listA, listB);
+        p3=new ListNode(num1+num2+add);
+        if(p3->val>=10)
+        {
+            p3->val-=10;
+            add=1;
+        }
+        p3=p3->next;
+    }
+    return list;
 }
