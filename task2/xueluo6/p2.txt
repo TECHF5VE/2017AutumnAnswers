@@ -1,0 +1,69 @@
+﻿// ConsoleApplication5.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include"iostream"
+using namespace std;
+struct ListNode
+{
+	int val;
+	ListNode *next;
+};
+ListNode* addTwoNumbers(ListNode* listl1, ListNode* listl2)
+{
+	int c, j, k, a, b, l = 0;
+	ListNode *q;
+	ListNode * head = new ListNode();
+	head->next = nullptr;
+	while (listl1 != nullptr || listl2 != nullptr) {
+		ListNode*p = new ListNode();
+		j = listl1->val;
+		k = listl2->val;
+		c = (j + k) / 10;
+			if (c == 0) {
+				a = j + k + l;
+				l = c;
+				p->val = a;
+			}
+			else {
+				b = j + k - 10 + l;
+				l = c;
+				p->val = b;
+			}
+			listl1 = listl1->next;
+			listl2 = listl2->next;
+			p->next = head->next;
+			head->next = p;
+		}
+	q = head->next;
+	while (q != nullptr) {
+		cout << q->val;
+		q = q->next;
+	}
+	return 0;
+}
+int main() {
+	ListNode *listA = new ListNode();
+	ListNode *listB = new ListNode();
+	ListNode *A, *B;
+	int a[] = { 1,3,3 };
+	int b[] = { 5,9,2 };
+	int i;
+	listA->next = nullptr;
+	for (i = 0; i < sizeof(a)/sizeof(int); i++) {
+		A = new ListNode();
+		A->val = a[i];
+		A->next = listA->next;
+		listA->next = A;
+	}
+	listB->next = nullptr;
+	for (i = 0; i < sizeof(b)/sizeof(int); i++) {
+		B = new ListNode();
+		B->val = b[i];
+		B->next = listB->next;
+		listB->next = B;
+	}
+	addTwoNumbers(A, B);
+	system("pause");
+	return 0;
+}
