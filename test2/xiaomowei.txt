@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+struct ListNode
+ {
+ 	int val;
+ 	ListNode *next;
+ 	ListNode(int x = 0, ListNode* next = nullptr) :val(x), next(next){}
+ };
+
+ ListNode* addTwoNumbers(ListNode *l1, ListNode *l2)
+ {
+  	ListNode *result = new ListNode();
+ ListNode* addTwoNumbers(ListNode *l1, ListNode *l2)
+  	}
+  
+  	return result;
+
+ void showList(ListNode* list)
+ {
+ 	ListNode *p = list->next;
+ 	while (p != nullptr)
+ {
+ 	cout << p->val << ' ';
+ p = p->next;
+ }
+ void initList(ListNode * list, int *data, int length)
+ {
+ ListNode *p = list;
+	for (int i = 0; i < length; i++)
+ {
+ 	p->next = new ListNode(data[i]);
+ p = p->next;
+ 	}
+ }
+ 
+ 
+ template <class T>
+ int getArrayLen(T& array)
+ {
+ 	return (sizeof(array) / sizeof(array[0]));
+ }
+ int main()
+ {
+ 	ListNode *listA = new ListNode();
+ 	ListNode *listB = new ListNode();
+ 	int a[3] = { 2,4,3 };
+ 	int b[3] = { 5,6,4 };
+ 	initList(listA, a, getArrayLen(a));
+ 	initList(listB, b, getArrayLen(b));
+ 
+ ListNode *result = addTwoNumbers(listA, listB);
+showList(result);system("pause");
+ 	return 0;
+  }
