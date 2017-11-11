@@ -47,27 +47,29 @@ int main() {
 	ListNode *listB = new ListNode();
 	ListNode *A, *B;
 	int a[] = { 1,3,3 };
-	int b[] = { 5,9,2,1 };
-	int i,j;
+	int b[] = { 5,9,2,1,0 };
+	int i,j,k;
+	j = sizeof(a) / sizeof(int);
+	k = sizeof(b) / sizeof(int);
 	listA->next = nullptr;
-	for (i = 0; i < sizeof(a)/sizeof(int); i++) {
+	for (i = 0; i < j; i++) {
 		A = new ListNode();
 		A->val = a[i];
 		A->next = listA->next;
 		listA->next = A;
 	}
 	listB->next = nullptr;
-	for (i = 0; i < sizeof(b)/sizeof(int); i++) {
+	for (i = 0; i < k; i++) {
 		B = new ListNode();
 		B->val = b[i];
 		B->next = listB->next;
 		listB->next = B;
 	}
-	if (sizeof(a) < sizeof(b)) {
+	for (; j < k;j++) {
 		int A1=1;
 		ListNode*x, *y;
 		x = A;
-		while (x&&A1 < sizeof(a) / sizeof(int)) {
+		while (x&&A1 < j) {
 			x = x->next;
 			++A1;
 		}
@@ -76,11 +78,11 @@ int main() {
 		y->next = x->next;
 		x->next = y;
 	}
-	if (sizeof(a) > sizeof(b)) {
+	for (; j > k; k++) {
 		int B1 = 1;
 		ListNode*x, *y;
 		x = B;
-		while (x&&B1 < sizeof(a) / sizeof(int)) {
+		while (x&&B1 < j) {
 			x = x->next;
 			++B1;
 		}
