@@ -1,0 +1,49 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+unsigned char*p[8] = { NULL };
+long result(int i, int j) {
+	long res = 0; int k;
+	for (k = 0; i <= j; i++, k++)
+		res = res + *p[i] * pow(2, 8 * k);
+	return res;
+}
+unsigned long result1(int i, int j) {
+	unsigned long res = 0; int k;
+	for (k = 0; i <= j; i++, k++)
+		res = res + *p[i] * pow(2, 8 * k);
+	return res;
+}
+char result2(int i, int j) {
+	char res = 0; int k;
+	for (k = 0; i <= j; i++, k++)
+		res = res +char (*p[i] * pow(2, 8 * k));
+	return res;
+}
+int main() {
+	int i;
+	long res = 0;
+	unsigned long res1;
+	for (i = 0; i <= 7; i++)
+		p[i] = new unsigned char;
+	*p[0] = 255; *p[1] = 255; *p[2] = 255; *p[3] = 127;
+	*p[4] = 0; *p[5] = 0; *p[6] = 0; *p[7] = 128;
+	cout << result(0, 3) << "\t" << result(4, 7) << endl;;
+	*p[0] = 245; *p[1] = 255; *p[2] = 244; *p[3] = 255;
+	*p[4] = 243; *p[5] = 255; *p[6] = 242; *p[7] = 255;
+	cout << result(0, 1) << "\t" << result(2, 3) << "\t";
+	cout << result(4, 5) << "\t" << result(6, 7) << endl;
+	*p[0] = 128; *p[1] = 1; *p[2] = 251; *p[3] = 135;
+	*p[4] = 255; *p[5] = 255; *p[6] = 255; *p[7] = 255;
+	cout << -result(0, 0) << "\t" << result(2, 3) << "\t";
+	cout<<result(1,1)*256<<'\t'<< result1(4, 7) << endl;
+	*p[0] = 'A'; *p[1] = 'h'; *p[2] = 'e'; *p[3] = 'l';
+	*p[4] = 'l'; *p[5] = 'o'; *p[6] = '!'; *p[7] = '\0';
+	cout << result2(0, 0) << '\t';
+	for (i = 1; i <= 7; i++)
+		cout << result2(i, i);
+	for (i = 0; i <= 7; i++)
+		delete p[i];
+	system("pause");
+	return 0;
+}
