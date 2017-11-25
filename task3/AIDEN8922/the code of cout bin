@@ -1,0 +1,68 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+float y,x,d,z;
+int a[23],temp[100],E[8],fin[32],sign,e;     
+int main(){
+	cin>>y;
+	if(y>=0) sign=0;              //确定符号位
+	else sign=1; 
+	x=fabs(y);
+	z=floor(x);
+	d=x-z;
+	int z1,i=0,j=0,k;
+	if(z>0){                               //分类 分为纯小数或整数小数混合的 目前为混合情况的处理
+		    z1=(int)z;
+			while((z1!=0)&&(i<=38)){          //将整数部分换算成二进制并保存到temp数组中
+			   temp[i]=z1%2;
+			   z1=z1/2;                  
+			   i++;
+			}	
+		    int j;
+            for(j=i-2,k=0;j>=0&&22-k>=0;j--,k++)
+			   a[22-k]=temp[j];               //temp为临时存放数组
+		    for(k=23-i;k>=0;k--){                    //小数部分换算二进制
+			   d=d*2;
+			   if(d<1) a[k]=0;
+			   else a[k]=1,d=d-1; }                
+            e=i-1+127;k=0;             
+		    while(e!=0){
+			   E[k]=e%2;        //确定指数部分并换算成二进制
+		       e=e/2;
+			   k++;
+			}
+	}
+    if(z==0){                            //目前为纯小数情况的处理                                 
+		for(i=0;i<=59;i++){           //小数换算成二进制
+			d=d*2;
+			if(d<1) temp[i]=0;
+			else temp[i]=1,d=d-1;
+		}                               
+		for(i=0;i<=22;i++){
+			if (temp[i]!=0)
+			{j=i;break;}
+		}                    //j=3
+		e=-(j+1)+127;i=0;                      //确定指数部分
+			while(e!=0){
+				E[i]=e%2;
+				e=e/2;
+				i++;
+			}
+			for(i=0;i<=22;j++,i++){
+				a[i]=temp[j+1];
+			}
+	}
+	fin[31]=sign;             
+	for(i=7;i>=0;i--)          //将符号部分 指数部分 有效数字部分合并到一个数组
+		fin[23+i]=E[i];
+	for(i=22;i>=0;i--)
+		fin[i]=a[i];
+	int t;
+	for(j=28;j>=0;j=j-4){              //转换成十六进制
+		t=0;
+	    for(i=0;i<=3;i++)
+		   t=t+(fin[j+i])*pow(2,i);
+	    cout<<hex<<t;
+	}
+	return 0;
+}
