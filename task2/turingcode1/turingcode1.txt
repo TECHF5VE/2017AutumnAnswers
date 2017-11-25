@@ -1,0 +1,84 @@
+编号 19
+#include<stdio.h>
+#include<malloc.h>
+#define NULL 0
+#define LEN sizeof(struct ListNode)
+struct ListNode
+{
+	int val;
+	struct ListNode *next;
+};
+int n;
+
+struct ListNode *creat(void)        //定义函数
+{
+	struct ListNode *head;
+	struct ListNode *p1, *p2;
+	n = 0;
+	p1 = p2 = (struct ListNode*)malloc(LEN);
+	scanf_s("%d", &p1->val);
+	head = NULL;
+	while (p1-> val!= 0)              //当输入数字0时，开辟链表节点结束
+	{
+		n = n + 1;
+		if (n == 1) head = p1;
+		else p2->next = p1;
+		p2 = p1; 
+		p1 = (struct ListNode*)malloc(LEN);
+		scanf_s("%d", &p1->val);
+	}
+	p2->next = NULL;
+	return(head);
+}
+
+int a[10], b[10], c[10];                       //定义a,b,c三个数组
+
+
+void main()
+{
+   struct ListNode*l1, *l2;
+   int  i = 0, j = 0, k = 0, jinw = 0, t;
+   l1 = creat();
+   l2 = creat();
+	
+   if (l1->next != NULL)                          //将链表中节点数据输入数组中
+	do
+	{
+		a[k] = l1->val;
+		l1 = l1->next;
+		k++;
+	} while (l1->next != NULL);
+	a[k] = l1->val;
+	
+
+	if (l2->next != NULL)
+		do
+		{
+
+			b[j] = l2->val;
+			l2 = l2->next; 
+			j++;				
+		} while (l2->next!= NULL);
+		b[j]=l2->val;
+
+
+for (i = 0; i <= 9; i++)                   //a,b数组相应位置数值相加，数值赋给c数组相应位置，jinw代表进位
+	{
+	c[i] = a[i] + b[i]+jinw;
+	jinw = c[i] / 10;
+	t = c[i] % 10;
+	c[i] = t;
+	}
+			
+			
+for (i = 9; i >= 0; i--)                  //确定c数组中有用数结束位置
+	{
+	j = i;
+	if (c[i] != 0)
+	 break;
+	}
+               
+for (i = 0;  i<= j; i++)                   //输出c数组
+    printf("%d ", c[i]);
+}
+
