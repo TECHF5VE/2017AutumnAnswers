@@ -11,4 +11,5 @@ int main()
 {
 	float a = 3.14159;
 	Binary(a);
+	return 0;
 }
