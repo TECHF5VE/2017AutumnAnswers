@@ -1,0 +1,113 @@
+﻿// ConsoleApplication5.cpp: 定义控制台应用程序的入口点。
+//
+
+#include "stdafx.h"
+#include"iostream"
+#include"cstring"
+using namespace std;
+struct ListNode
+{
+	int val;
+	ListNode *next;
+};
+ListNode* addTwoNumbers(ListNode* listl1, ListNode* listl2)
+{
+	int c, j, k, a, b, l = 0;
+	ListNode *q;
+	ListNode * head = new ListNode();
+	head->next = nullptr;
+	while (listl1 != nullptr || listl2 != nullptr) {
+		ListNode*p = new ListNode();
+		j = listl1->val;
+		k = listl2->val;
+		c = (j + k) / 10;
+		if (c == 0) {
+			a = j + k + l;
+			l = c;
+			p->val = a;
+		}
+		else {
+			b = j + k - 10 + l;
+			l = c;
+			p->val = b;
+		}
+		listl1 = listl1->next;
+		listl2 = listl2->next;
+		p->next = head->next;
+		head->next = p;
+	}
+	q = head->next;
+	while (q != nullptr) {
+		cout << q->val<<'\n';
+		q = q->next;
+	}
+	return 0;
+}
+int main() {
+	ListNode *listA = new ListNode();
+	ListNode *listB = new ListNode();
+	ListNode *A, *B;
+	int i, j, k;
+	char a[20], b[20];
+	cin.getline(a, 19);
+	cin.getline(b, 19);
+	j = strlen(a);
+	k = strlen(b);
+	listA->next = nullptr;
+	A = new ListNode();
+	A->val = 0;
+	A->next = listA->next;
+	listA->next = A;
+	listB->next = nullptr;
+	for (i = 0; i < j; i++) {
+		if (a[i] == ' ') {
+			continue;
+		}
+		A = new ListNode();
+		A->val = a[i] - '0';
+		A->next = listA->next;
+		listA->next = A;
+	}
+	B = new ListNode();
+	B->val = 0;
+	B->next = listB->next;
+	listB->next = B;
+	for (i = 0; i < k; i++) {
+		if (b[i] == ' ') {
+			continue;
+		}
+		B = new ListNode();
+		B->val = b[i]-'0';
+		B->next = listB->next;
+		listB->next = B;
+	}
+	for (; j < k; j++) {
+		int A1 = 1;
+		ListNode*x, *y;
+		x = A;
+		while (x&&A1 < j) {
+			x = x->next;
+			++A1;
+		}
+		y = new ListNode();
+		y->val = 0;
+		y->next = x->next;
+		x->next = y;
+	}
+	for (; j > k; k++) {
+		int B1 = 1;
+		ListNode*x, *y;
+		x = B;
+		while (x&&B1 < k) {
+			x = x->next;
+			++B1;
+		}
+		y = new ListNode();
+		y->val = 0;
+		y->next = x->next;
+		x->next = y;
+	}
+	addTwoNumbers(A, B);
+	system("pause");
+	return 0;
+}
