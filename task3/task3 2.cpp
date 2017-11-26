@@ -1,32 +1,34 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
-int main() 
-{
-	char *b = new char[8];//¶¯Ì¬ÉêÇë64bitsÄÚ´æ
+int main() {
+	char *b = new char[8];
 
-	*(int*)b = 2147483647;
-	*(int*)(b + 4) = (-2147483647 - 1);
+	*(reinterpret_cast<int*>(b)) = 2147483647;
+	*(reinterpret_cast<int*>(b + 4)) = (-2147483647 - 1);
 	cout << "1st Round:" << endl;
-	cout << "["<< *(int*)b << "," << *(int*)(b + 4) <<"]"<< endl;//µÚÒ»×éÊı¾İ
+	cout << "["<< *(reinterpret_cast<int*>(b)) << "," << *(reinterpret_cast<int*>(b + 4))  <<"]"<< endl;//ç¬¬ä¸€è½®è¾“å‡º
 
-	*(unsigned short*)b = 65525;
-	*(unsigned short*)(b+2)= 65524;
-	*(unsigned short*)(b+4) = 65523;
-	*(unsigned short*)(b + 6) = 65522;
+	*(reinterpret_cast<unsigned short*>(b)) = 65525;
+	*(reinterpret_cast<unsigned short*>(b+2)) = 65524;
+	*(reinterpret_cast<unsigned short*>(b + 4)) = 65523;
+	*(reinterpret_cast<unsigned short*>(b + 6)) = 65522;
 	cout << "2st Round:" << endl;
-	cout << "[" << *(unsigned short*)b << "," << *(unsigned short*)(b + 2) << "," << *(unsigned short*)(b + 4) << "," << *(unsigned short*)(b + 6) << "]" << endl;//µÚ¶ş×éÊı¾İ
+	cout << "[" << *(reinterpret_cast<unsigned short*>(b)) << "," << *(reinterpret_cast<unsigned short*>(b + 2))
+		<< "," << *(reinterpret_cast<unsigned short*>(b + 4)) << "," << *(reinterpret_cast<unsigned short*>(b + 6)) << "]" << endl;;//ç¬¬äºŒè½®è¾“å‡º
 
-	*(char*)b = -128;
-	*(unsigned short*)(b + 1) = 34811;
-	*(unsigned char*)(b + 3) = 255;
-	*(unsigned int*)(b + 4) = 4294967295;
+	*(reinterpret_cast<char*>(b)) = -128;
+	*(reinterpret_cast<unsigned short*>(b + 1)) = 34811;
+	*(reinterpret_cast<unsigned char*>(b + 3) )= 255;
+	*(reinterpret_cast<unsigned int*>(b + 4)) = 4294967295;
 	cout << "3st Round:" << endl;
-	cout << "[" << (int)*b << "," << *(unsigned short*)(b + 1) << "," << (int)*(unsigned char*)(b + 3) << "," << *(unsigned int*)(b + 4) << "]" << endl;//µÚÈı×éÊı¾İ
-
+	cout << "[" << (int)*(reinterpret_cast<char*>(b)) << "," << *(reinterpret_cast<unsigned short*>(b + 1)) << ","
+		<< (int)(*(reinterpret_cast<unsigned char*>(b + 3))) << "," << *(reinterpret_cast<unsigned int*>(b + 4)) << "]" << endl;;//ç¬¬ä¸‰è½®è¾“å‡º
+	
 	*b = 'A';
 	strcpy_s(b + 1, 7, "hello!\0");
 	cout << "4st Round:" << endl;
-	cout << "[" << "'"<<*b << "'"<<"," <<"\""<< *(b + 1) <<*(b+2)<<*(b+3)<<*(b+4)<<*(b+5)<<*(b+6)<<"\\0"<<"\""<<"]"<< endl;//µÚËÄ×éÊı¾İ
+	cout << "[" << "'"<<*b << "'"<<"," <<"\""<< *(b + 1) <<*(b+2)<<*(b+3)<<*(b+4)<<*(b+5)<<*(b+6)<<"\\0"<<"\""<<"]"<< endl;;//ç¬¬å››è½®è¾“å‡º
 
 	delete[]b;
 	return 0;
