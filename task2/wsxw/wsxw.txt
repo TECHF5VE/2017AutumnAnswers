@@ -1,0 +1,60 @@
+#include <iostream>
+#include <string>
+using namespace std;
+struct ListNode {
+	int val;
+	ListNode *next;
+	ListNode(int x) : val(x), next(NULL) {}
+};
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+	ListNode *q1 = l1, *q2 = l2;
+	ListNode *l3=new ListNode(l1->val+l2->val); ListNode*q3 = l3;
+	do
+	{
+		cout << q3->val % 10;
+		if (q3->val >= 10) {
+			q3->val = q3->val - 10;
+			q3->next = new ListNode(1);
+			q3 = q3->next;
+
+		}
+		else {
+			q3->next = new ListNode(0);
+			q3 = q3->next;
+		}
+		if (q1->next != NULL)q1 = q1->next;
+		if (q2->next != NULL)q2 = q2->next;
+		if (q1->next != NULL || q1->val > 0)q3->val += q1->val;
+		if (q2->next != NULL || q2->val > 0)q3->val += q2->val;
+		if (q1->next == NULL)q1->val = 0;
+		if (q2->next == NULL)q2->val = 0;
+	} while (q1->next != NULL || q2->next != NULL);
+	cout << q3->val;
+	return l3;
+}
+	int main()
+{
+	int i, m, n;
+	ListNode *la, *lb;
+	int a[] = { 1, 3, 3 };
+	int b[] = { 5, 9, 2 };
+	m = sizeof(a) / sizeof(int); n = sizeof(b) / sizeof(int);
+	ListNode* listA = new ListNode(a[0]);
+	ListNode* listB = new ListNode(b[0]);
+	la = listA;
+	lb = listB;
+	for (i = 1; i< m; i++)
+	{
+		listA->next = new ListNode(a[i]);
+		listA = listA->next;
+	}
+	for (i = 1; i<n; i++)
+	{
+		listB->next = new ListNode(b[i]);
+		listB = listB->next;
+	}
+	addTwoNumbers(la,lb);
+	system("pause");
+	return 0;
+
+}
