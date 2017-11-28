@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+
+int main()         //动态分配内存
+{
+	int *p = new int [2];
+	if (p == nullptr) {
+		system("pause");
+		return 0;
+	}
+	p[0] = 2147483647;
+	p[1] = -2147483647;
+	p[1] = p[1]--;
+	cout << '[' << p[0] << ',' << p[1] << ']' << endl;
+
+	unsigned short *q = reinterpret_cast<unsigned short*>(p);
+	if (q == nullptr) {
+		system("pause");
+		return 0;
+	}
+	q[0] = 65525;
+	q[1] = 65524;
+	q[2] = 65523;
+	q[3] = 65522;
+	cout << '[' << q[0] << ',' << q[1] << ','
+		<< q[2] << ',' << q[3] << ']'<<endl;
+
+	char *a = reinterpret_cast<char*>(p);
+	if (a == nullptr) {
+		system("pause");
+		return 0;
+	}
+	*a = char(-127);
+	*a = *a - 1;
+	unsigned short *b = reinterpret_cast<unsigned short*>(a+sizeof(char));//(a+sizeof(char))表示指向这段内存的下一个位置。
+	if (b == nullptr) {
+		system("pause");
+		return 0;
+	}
+	*b = 34811;
+	unsigned char *c = reinterpret_cast<unsigned char*>(b+sizeof(unsigned short));
+	if (c == nullptr) {
+		system("pause");
+		return 0;
+	}
+	*c = 255;
+	unsigned int *d = reinterpret_cast<unsigned int*>(c+sizeof(unsigned char));
+	if (d == nullptr) {
+		system("pause");
+		return 0;
+	}
+	*d = 4294967295;
+	cout << '[' << int(*a) << ',' << *b << ',' << int(*c) << ',' << *d << ']' << endl;
+
+	char *m = reinterpret_cast<char*>(p);
+	if (m == nullptr) {
+		system("pause");
+		return 0;
+	}
+	*m = 'A';
+	char *n = reinterpret_cast<char*>(p+1);
+	if (m == nullptr) {
+		system("pause");
+		return 0;
+	}
+	n = "hello!\0";
+	cout << '[' << *m << ',' << n << ']';
+	system("pause");
+	return 0;
+}
+
+#include<iostream>
+using namespace std;
+
+int main()         //十进制转换为十六进制
+{
+	int n, i = 0;
+	char a[10];
+	cin >> n;
+	while (n / 16 != 0) {
+		int tmp = n % 16;
+		if (tmp < 10)
+			a[++i] = tmp + '0';
+		else
+			a[++i] = n - 10 + 'A';
+		n = n / 16;
+	}
+	if (n != 0) {
+		if (n < 10)
+			a[++i] = n + '0';
+		else a[++i] = n - 10 + 'A';
+	}
+	for (int j = i;j >= 1;j--)
+		cout << a[j];
+    return 0;
+}
