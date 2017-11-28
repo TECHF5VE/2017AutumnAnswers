@@ -1,166 +1,156 @@
-#include <iostream>
-#include <stack>
-#include <queue>
+#include<iostream>
+#include<cmath>
 using namespace std;
 int main()
 {
-	stack<char> binPower, binTail;		
-	queue<char> binResult, binDecimal;	
-	long long  power;				
-	long long  inputInteger;		
-	long long  output = 0;			
-	double input, inputDecimal;		
-	cout << "Enter a float:";
-	cin >> input;
+	int a[16] = { 0 }, b[24] = { 0 }, c[8] = { 0 }, d[23] = { 0 }, e[32] = { 0 };
+	char p[8] = { 0 };
+	double num; 
+	int integer, power;
+	double decimal;
+	cin >> num;
+	if (num > 0)  a[0] = 0;
+	else a[0] = 1;
+	num = fabs(num);
 
-	if (input >= 0)
-	{
-		binResult.push(0);
-	}
-	else
-	{
-		binResult.push(1);
-		input = -input;
-	}
+	integer = (int)num;
+	decimal = num - (double)integer;
 
-	inputInteger = (long long)input;
-	inputDecimal = input - (double)inputInteger;
-
-	if (inputInteger == 0)
-	{
-		power = -1;
-	    if (inputDecimal == 0)
-		{
-			for (int i = 0; i < 24; i++)
-			{
-				binDecimal.push(0);
-			}
+	if (integer == 0){
+		for (int i = 1; i < 16; ++i)
+			a[i] = 0;
+		for (int j = 0 ; j < 24; ++j){
+			double t = decimal * 2;
+			b[j] = (int)t;
+			decimal = t - b[j];
 		}
-		else
-		{
-			while (binDecimal.size() != 24)
-			{
-				binDecimal.push((int)(inputDecimal * 2));
-				inputDecimal = inputDecimal * 2 - (int)(inputDecimal * 2);
-				if (binDecimal.front() == 0)
-				{
-					binDecimal.pop();
-					--power;
+		int tem;
+		for(int j=0;j<24;++j){
+			if(b[j]!=0){
+				tem=j;
+			   power=126-j;
+			}
+			if(b[j]!=0) break;
+		}
+		for (int i = 7; i >= 0; --i){
+			int t = power % 2;
+			power = power / 2;
+			c[i] = t;
+		}
+		e[0] = a[0];
+		for (int i = 1; i < 9; ++i){
+			e[i] = c[i - 1];
+		}
+		for (int i = 9; i < 32; ++i){
+			e[i] = b[tem+i-8];
+		}
+	}
+
+	else {
+		for (int i = 15; i >0; --i){
+			int t = integer % 2;
+			integer = integer / 2;
+			a[i] = t;
+		}
+		for (int j = 0; j < 24; ++j){
+			double t = decimal * 2;
+			b[j] = (int)t;
+			decimal = t - b[j];
+		}
+		int temp=0;
+		for (int i = 1; i < 16; ++i){
+			if (a[i] != 0){
+				temp = i;
+				int t = 15 - i;
+				power = 127 + t;
+			}
+			if (a[i] != 0) break;
+		}
+		for (int i = 0; i < 15 - temp; ++i){
+			d[i] = a[temp + 1 + i];
+		}
+		for (int i = 15 - temp ;i < 23; ++i){
+			d[i] = b[i + temp - 15];
+		}
+
+		for (int i = 7; i >= 0; --i){
+			int t = power % 2;
+			power = power / 2;
+			c[i] = t;
+		}
+		e[0] = a[0];
+		for (int i = 1; i < 9; ++i){
+			e[i] = c[i - 1];
+		}
+		for (int i = 9; i < 32; ++i){
+			e[i] = d[i - 9];
+		}
+	}
+		for (int i = 0; i < 8; ++i){
+			int t = e[4 * i] * 8 + e[4 * i + 1] * 4 + e[4 * i + 2] * 2 + e[4 * i + 3] * 1;
+			if (t < 10){
+				p[i] = t+'0';
+			}
+			else if (t>9){
+				switch (t){
+				case 10:p[i] = 'a'; break;
+				case 11:p[i] = 'b'; break;
+				case 12:p[i] = 'c'; break;
+				case 13:p[i] = 'd'; break;
+				case 14:p[i] = 'e'; break;
+				case 15:p[i] = 'f'; break;
 				}
 			}
-			binDecimal.pop();
 		}
-
-		power += 127;
-		while (power > 0)
-		{
-			binPower.push(power % 2);
-			power /= 2;
+		cout << "0x";
+		for (int i = 0; i < 8; ++i){
+			cout << p[i];
 		}
-	}
-	else
-	{
-		while (inputInteger > 0)
-		{
-			binTail.push(inputInteger % 2);
-			inputInteger /= 2;
-		}
-		power = binTail.size() - 1 + 127;
-		binTail.pop();
-		int length = 23-binTail.size();
-		for (int i = 0; i < length; i++)
-		{
-			binDecimal.push((int)(inputDecimal * 2));
-			inputDecimal = inputDecimal * 2 - (int)(inputDecimal * 2);
-		}
+			cout<<endl;
 
-		while (power > 0)
-		{
-			binPower.push(power % 2);
-			power /= 2;
-		}
 
-	}
-	for (unsigned int i = 0; i < 8 - binPower.size(); ++i)
-	{
-		binResult.push(0);
-	}
-	while (!binPower.empty())
-	{
-		binResult.push(binPower.top());
-		binPower.pop();
-	}
-	while (!binTail.empty())
-	{
-		binResult.push(binTail.top());
-		binTail.pop();
-	}
-	while (!binDecimal.empty())
-	{
-		binResult.push(binDecimal.front());
-		binDecimal.pop();
-	}
+		void *mem=operator new(8);
+		//第一轮
+		int *ptr1=static_cast<int*>(mem);
+		int *ptr2=ptr1+1;
+		*ptr1=((unsigned)~0)>>1;
+		*ptr2=1<<31;
+		cout<<"第一轮:["<<*ptr1<<","<<*ptr2<<"]\n";
 
-	power = 2147483648;
-	while (!binResult.empty())
-	{
-		output += binResult.front()*power;
-		binResult.pop();
-		power /= 2;
-	}
-	cout << "0x" << hex << output << endl << dec << endl;
+        //第二轮
+		unsigned short *ptr3,*ptr4,*ptr5,*ptr6;
+		ptr3=static_cast<unsigned short*>(mem);
+		ptr4=ptr3+1;
+		ptr5=ptr4+1;
+		ptr6=ptr5+1;
+		*ptr3=65525;
+		*ptr4=65524;
+		*ptr5=65523;
+		*ptr6=65522;
+		cout<<"第二轮:["<<*ptr3<<","<<*ptr4<<","<<*ptr5<<","<<*ptr6<<"]\n";
 
-	
-	
-	
-	
-	
-	
-	
-	void *mem = operator new(8);
-	int *ptr1_a, *ptr1_b;
+		//第三轮
+		char*ptr7;
+		unsigned short*ptr8;
+		unsigned char*ptr9;
+		unsigned int*ptr10;
+		ptr7=static_cast<char*>(mem);
+		ptr8=reinterpret_cast<unsigned short*>(ptr7+1);
+		ptr9=reinterpret_cast<unsigned char*>(ptr8+1);
+		ptr10=reinterpret_cast<unsigned int*>(ptr9+1);
+		*ptr7=-128;
+		*ptr8=34811;
+		*ptr9=255;
+		*ptr10=4294967295;
+		cout<<"第三轮:["<<(int)*ptr7<<","<<*ptr8<<","<<(int)*ptr9<<","<<*ptr10<<"]\n";
 
-	
-	ptr1_a = static_cast<int*>(mem);
-	ptr1_b = ptr1_a+1;
-	*ptr1_a = ((unsigned)~0) >> 1;
-	*ptr1_b = 1 << 31;
-	cout << "第一轮：\n [" << *ptr1_a << ", " << *ptr1_b << "]\n";
+		//第四轮
+		char *ptra,*ptrb;
+		ptra=static_cast<char*>(mem);
+		ptrb=ptra+1;
+		*ptra='A';
+		ptrb="hello!\0";
+		cout<<"第四轮:["<<*ptra<<','<<ptrb<<"]\n";
 
-	
-	unsigned short *ptr2_a, *ptr2_b, *ptr2_c, *ptr2_d;
-	ptr2_a = static_cast<unsigned short*>(mem);
-	ptr2_b = ptr2_a+1;
-	ptr2_c = ptr2_b+1;
-	ptr2_d = ptr2_c+1;
-	*ptr2_a = 65525;
-	*ptr2_b = 65524;
-	*ptr2_c = 65523;
-	*ptr2_d = 65522;
-	cout << "第二轮：\n [" << *ptr2_a << ", " << *ptr2_b << ", " << *ptr2_c << ", " << *ptr2_d << "]\n";
-
-	
-	char *ptr3_a;
-	unsigned short *ptr3_b;
-	unsigned char *ptr3_c;
-	unsigned int *ptr3_d;
-	ptr3_a = static_cast<char*>(mem);
-	ptr3_b = reinterpret_cast<unsigned short*>(ptr3_a + 1);
-	ptr3_c = reinterpret_cast<unsigned char*>(ptr3_b + 1);
-	ptr3_d = reinterpret_cast<unsigned*>(ptr3_c + 1);
-	*ptr3_a = -128;
-	*ptr3_b = 34811;
-	*ptr3_c = ~0;
-	*ptr3_d = 4294967295;
-	cout << "第三轮：\n [" << (int)*ptr3_a << ", " << *ptr3_b << ", " << (int)*ptr3_c << ", " << *ptr3_d << "]\n";
-
-	
-	char *ptr4_a;
-	char *ptr4_b;
-	ptr4_a = static_cast<char*>(mem);
-	ptr4_b = ptr4_a+1;
-	*ptr4_a = 'A';
-	ptr4_b = "hello!\0";
-	cout << "第四轮：\n [" << *ptr4_a << ", " << ptr4_b << "]\n";
-	return 0;
+		return 0;
 }
