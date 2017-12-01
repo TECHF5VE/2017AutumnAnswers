@@ -1,7 +1,20 @@
+#include<iostream>
+using namespace std;
+int main(){
+	float x;
+	cout << "Input:" << endl;
+	cin >> x;
+	unsigned int *p = nullptr;
+	p = (unsigned int*)&x;
+	cout << hex <<"0x"<<*p << endl;
+	return 0;
+}
+
+
+
 #include <iostream>
 using namespace std;
 int main() {
-	//动态内存分配
 	char *p = new char[8];
 	int *a = reinterpret_cast<int*>(p);
 	a[0]=2147483647;
