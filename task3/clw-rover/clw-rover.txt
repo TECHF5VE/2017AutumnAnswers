@@ -1,0 +1,56 @@
+#include<iostream>
+using namespace std;
+int main(){
+	float x;
+	cout << "Input:" << endl;
+	cin >> x;
+	unsigned int *p = nullptr;
+	p = (unsigned int*)&x;
+	cout << hex <<"0x"<<*p << endl;
+	return 0;
+}
+
+
+
+#include <iostream>
+using namespace std;
+int main() {
+	char *p = new char[8];
+	int *a = reinterpret_cast<int*>(p);
+	a[0]=2147483647;
+	a[1]=-2147483647-1;
+	cout << "第一轮:" << endl;
+	cout << "[" <<a[0]<< "," <<a[1]<< "]" << endl;//第一轮
+									  
+	unsigned short *b = reinterpret_cast<unsigned short*>(p);
+	b[0] = 65525;
+	b[1]= 65524;
+	b[2]= 65523;
+	b[3]= 65522;
+	cout << "第二轮:" << endl;
+	cout << "[" <<b[0]<< "," <<b[1]<< "," <<b[2]<< "," <<b[3]<< "]" << endl;//第二轮
+																					
+	char *c = reinterpret_cast<char*>(p);
+	*c = char(-128);
+	unsigned short *d = reinterpret_cast<unsigned short*>(c+sizeof(char));
+	*d = 34811;
+	unsigned char *e = reinterpret_cast<unsigned char*>(d+sizeof(unsigned short));
+	*e = 255;
+	unsigned int *f = reinterpret_cast<unsigned int*>(e+sizeof(unsigned char));
+	*f = 4294967295;
+	cout << "第三轮:" << endl;
+	cout << "[" <<int(*c)<< "," <<*d<< ","
+		<<int(*e)<< "," <<*f<< "]" << endl;//第三轮输出
+	
+	p[0]= 'A';
+	p[1]='h';
+	p[2] = 'e';
+	p[3] = 'l';
+	p[4] = 'l';
+	p[5] = 'o';
+	p[6] = '!';
+	p[7] = '\0';
+	cout << "第四轮:" << endl;
+	cout << "[" << "'" <<p[0]<< "'" << "," << "\"" <<p[1]<<p[2]<<p[3]<<p[4]<<p[5]<<p[6]<<"\\0" << "\"" << "]" << endl;;//第四轮输出
+	return 0;
+}
