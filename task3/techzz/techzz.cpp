@@ -102,7 +102,7 @@ int main()
 		int *ptr2=ptr1+1;
 		*ptr1=((unsigned)~0)>>1;
 		*ptr2=1<<31;
-		cout<<"第一轮:["<<*ptr1<<","<<*ptr2<<"]\n";
+		cout<<"第一轮:["<<dec<<*ptr1<<","<<*ptr2<<"]\n";
 
         //第二轮
 		unsigned short *ptr3,*ptr4,*ptr5,*ptr6;
