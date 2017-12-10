@@ -4,7 +4,6 @@ using namespace std;
 int main()
 {
 	int a[16] = { 0 }, b[24] = { 0 }, c[8] = { 0 }, d[23] = { 0 }, e[32] = { 0 };
-	char p[8] = { 0 };
 	double num; 
 	int integer, power;
 	double decimal;
