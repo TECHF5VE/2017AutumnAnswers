@@ -86,27 +86,14 @@ int main()
 			e[i] = d[i - 9];
 		}
 	}
-		for (int i = 0; i < 8; ++i){
-			int t = e[4 * i] * 8 + e[4 * i + 1] * 4 + e[4 * i + 2] * 2 + e[4 * i + 3] * 1;
-			if (t < 10){
-				p[i] = t+'0';
-			}
-			else if (t>9){
-				switch (t){
-				case 10:p[i] = 'a'; break;
-				case 11:p[i] = 'b'; break;
-				case 12:p[i] = 'c'; break;
-				case 13:p[i] = 'd'; break;
-				case 14:p[i] = 'e'; break;
-				case 15:p[i] = 'f'; break;
-				}
-			}
-		}
-		cout << "0x";
-		for (int i = 0; i < 8; ++i){
-			cout << p[i];
-		}
-			cout<<endl;
+	unsigned int output=0,pow = 2147483648;
+	for(int i=0;i<32;++i){
+		output+=(int)e[i]*pow;
+		pow/=2;
+	}
+	
+	cout << "0x" << hex << output << endl ;
+	
 
 
 		void *mem=operator new(8);
