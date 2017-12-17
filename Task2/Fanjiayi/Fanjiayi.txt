@@ -1,0 +1,71 @@
+#include<iostream>
+using namespace std;
+struct Listnode
+{
+int val;
+Listnode *next;
+Listnode(int x):val(x),next(NULL){};
+};
+Listnode *addtwonumbers(Listnode *list1,Listnode *list2)
+{
+Listnode *list3=new Listnode(0);
+Listnode *m,*j,*q;
+q=list3;
+int n,i=0;
+for(m=list1,j=list2;((m->next!=NULL)&&(j->next!=NULL));m=m->next,j=j->next)
+{
+n=(m->next->val)+(j->next->val)+i;
+if(n>9)
+{
+i=n/10;
+n=n%10;
+}
+else i=0;
+q->next=new Listnode(n);
+q=q->next;
+}
+for(;(m->next==NULL)&&(j->next!=NULL);j=j->next)
+{
+n=j->next->val;
+q->next=new Listnode(n);
+q=q->next;
+}
+for(;(m->next!=NULL)&&(j->next==NULL);m=m->next)
+{
+n=m->next->val;
+q->next=new Listnode(n);
+q=q->next;
+}
+return list3;
+}
+void showList(Listnode *list)
+{
+Listnode *m=list->next;
+while(m!=NULL)
+{
+cout<<m->val<<'';
+m=m->next;
+}
+}
+int main()
+{
+Listnode *list1=new Listnode(0);
+Listnode *list2=new Listnode(0);
+int a[]={1,2,3,4};
+int b[]={5,6};
+Listnode *m=list1;
+Listnode *j=list2;
+for(int v=0;v<sizeof(a)/sizeof(int);v++)
+{
+m->next=new Listnode(a[v]);
+m=m->next;
+}
+for(int y=0;y<sizeof(b)/sizeof(int);y++)
+{
+j->next=new Listnode(b[y]);
+j=j->next;
+}
+Listnode *q=addtwonumbers(list1,list2);
+showList(q);
+return(0);
+}
