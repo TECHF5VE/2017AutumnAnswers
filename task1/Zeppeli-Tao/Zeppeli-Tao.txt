@@ -1,0 +1,5 @@
+a. 与 Git 同类型的工具有？         answer：git为分布式版本控制系统，网上查询不到类似工具，集中式版本控制系统有SVN，与github同类型的有GitLab Issues，GitKraken等。
+
+b. Git 分了哪几个区？                answer:  工作区、暂存区、本地仓库区。
+
+c. GitHub 的 Logo 是什么动物? answer: 章鱼猫。
